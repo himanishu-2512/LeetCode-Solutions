@@ -1,14 +1,14 @@
 class Solution {
 public:
     int lengthOfLastWord(string s) {
-        int count=0;
+        bool b=false;
         int num=0;
         for(int i=strlen(&s[0])-1;i>=0;i--){
             if(s[i]!=' '){
-                count=1;
+            b=true;
                 num++;
             }
-if(s[i]==' '&& count==1){
+if(s[i]==' '&& b){
     break;
 }
         }
