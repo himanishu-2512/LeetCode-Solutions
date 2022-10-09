@@ -5,9 +5,7 @@ public:
             if(nums[i]==0){
                 for(int j=i+1;j<nums.size();j++){
                     if(nums[j]!=0){
-                        nums[i]=nums[j]+nums[i];
-                        nums[j]=nums[i]-nums[j];
-                        nums[i]=nums[i]-nums[j];
+                        swap(nums[i],nums[j]);
                         break;
                     }
                 }
