@@ -1,29 +1,24 @@
 class Solution {
 public:
+    bool dfs(vector<vector<int>>& graph,int i,unordered_map<int,int> &m,int n){
+    m[i]=n;
+    for(int j:graph[i]){
+        if(!m[j]){
+            m[j]=-m[i];
+            if(!dfs(graph,j,m,-n))return false;
+        }
+        else if(m[j]==m[i])return false;
+    }
+    return true;
+    }
     bool isBipartite(vector<vector<int>>& graph) {
         unordered_map<int,int> m;
         for(int i=0;i<graph.size();i++){
-        queue<pair<int,int>> q;
         if(m[i]==0)
-        q.push({i,1});
-        
-       
-       while(!q.empty()){
-           auto [n,a]=q.front();
-           m[n]=a;
-           q.pop();
-           for(auto i:graph[n]){
-             if(m[i]!=0){
-                 if(m[i]!=-a){
-                   return false;
-                 }
-             }else{
-                 m[i]=-a;
-                 q.push({i,-a});
-             }
-
-           }
-       }}
+        if(!dfs(graph,i,m,1)){
+           return false;
+        }
+      }
        return true;
     }
 };
