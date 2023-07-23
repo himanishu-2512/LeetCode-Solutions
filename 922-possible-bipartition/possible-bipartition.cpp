@@ -1,23 +1,16 @@
 class Solution {
 public:
- bool bfs(vector<vector<int>>& v,int n,map<int,int> &m){
-     queue<int> q;
-     q.push(n);
-     m[n]=1;
-     while(!q.empty()){
-         int i=q.front();
-            q.pop();
-            for(int node:v[i]){
-                if(m[node]!=0){
-                    if(m[node]==m[i])return false;
-                }else{
-                    m[node]=-1*m[i];
-                    q.push(node);
-                }
-            }
-            
-         
-     }
+ bool dfs(vector<vector<int>>& v,int n,map<int,int> &m,int j){
+     m[n]=j;
+    for(auto i:v[n]){
+       if(!m[i]){
+
+      if(!dfs(v,i,m,-j))return false;
+      }
+       
+     else if(m[n]==m[i])return false;
+       
+    }
 return true;
  }
     bool possibleBipartition(int n, vector<vector<int>>& dislikes) {
@@ -29,7 +22,7 @@ return true;
     }
     for(int i=1;i<n+1;i++){
         if(!m[i]&&v[i].size()>0){
-        if(!bfs(v,i,m))return false;
+        if(!dfs(v,i,m,1))return false;
         }
     }
     return true;
