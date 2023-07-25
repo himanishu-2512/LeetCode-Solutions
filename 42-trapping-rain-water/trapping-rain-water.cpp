@@ -2,26 +2,23 @@ class Solution {
 public:
     int trap(vector<int>& height) {
         int n=height.size();
-        vector<int> left(n),right(n);
-
-       left[0]=height[0];
-       right[n-1]=height[n-1];
-        for(int i=1;i<n;i++){
-            if(left[i-1]<height[i]){
-                left[i]=height[i];
+        int sum=0,right=0,left=0,l=0,r=n-1;
+       while(l<=r){
+            if(left<=right){
+            if(left<height[l]){
+                left=height[l];
             }
-            else left[i]=left[i-1];
+            else sum+=left-height[l];
+            l++;
         }
-         for(int i=n-2;i>=0;i--){
-            if(right[i+1]<height[i]){
-                right[i]=height[i];
+         else{
+            if(right<height[r]){
+                right=height[r];
             }
-            else right[i]=right[i+1];
-        }
-         int sum=0;
-        for(int i=0;i<n;i++){
-        sum+=min(left[i],right[i])-height[i];
-        }
+            else sum+=right-height[r]; 
+            r--;
+         }
+       }
       return sum;
     }
 };
