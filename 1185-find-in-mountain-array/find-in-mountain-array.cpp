@@ -14,11 +14,11 @@ public:
         int st=0;
         int end=m.length()-1;
         int mid;
-        while(end>st){
+        while(end>=st){
             mid=st+(end-st)/2;
            
             if(m.get(mid)>m.get(mid+1)){
-                end=mid;
+                end=mid-1;
             }
             else if(m.get(mid)<m.get(mid+1)){
                 st=mid+1;
